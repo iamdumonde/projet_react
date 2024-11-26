@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from "./components/Header";
+import SectionService from "./components/SectionService";
+import OffreGratuite from "./components/OffreGratuite";
+import FournisseurSelect from "./components/FournisseurSelect";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <main className="flex flex-col items-center justify-center flex-grow px-4 sm:px-6 lg:px-8">
+        <div className="lg:flex lg:items-center pt-11">
+          <div className="lg:flex lg:w-[50%] ">
+            <Header />
+          </div>
+          <div>
+            <FournisseurSelect />
+          </div>
+        </div>
+
+        <div className="lg:w-full">
+          <OffreGratuite />
+        </div>
+
+        <div>
+          <SectionService />
+        </div>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
