@@ -6,7 +6,7 @@ import FournisseurSelect from "./components/FournisseurSelect";
 const App = () => {
   return (
     <div>
-      <main className="flex flex-col items-center justify-center flex-grow px-4 sm:px-6 lg:px-8">
+      <main className="flex flex-col items-center justify-center flex-grow lg:px-8">
         <div className="lg:flex lg:items-center pt-11">
           <div className="lg:flex lg:w-[50%] ">
             <Header />

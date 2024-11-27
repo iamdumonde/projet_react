@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 
 const FournisseurSelect = () => {
   const [step, setStep] = useState(1);
@@ -13,6 +15,17 @@ const FournisseurSelect = () => {
   const totalSteps = 4;
   const progress = Math.round((step / totalSteps) * 100);
 
+  const handleNextStep = (field) => {
+    if (!field) return;
+    setStep(step + 1);
+  };
+
+  const handlePreviousStep = () => {
+    if (step > 1) {
+      setStep(step - 1); // Décrémenter l'étape
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!postalCode || !phoneNumber || !isConsentChecked) {
@@ -25,22 +38,33 @@ const FournisseurSelect = () => {
     console.log("Consentement accepté:", isConsentChecked);
   };
 
-  const handleNextStep = (field) => {
-    if (!field) return;
-    setStep(step + 1);
-  };
-
   return (
-    <div className="bg-gray-50 flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <div className="w-full max-w-lg bg-white p-6">
+        
+        {step > 1 && (
+          <button
+            onClick={handlePreviousStep}
+            className="flex items-center mb-4 text-teal-600 hover:text-teal-800 transition"
+          >
+            <FaArrowLeft className="mr-2" />
+            Retour
+          </button>
+        )}
+
         {/* Barre de progression */}
-        <div className="relative w-full bg-gray-200 rounded-full h-3 mb-6">
+        <div className="relative w-full bg-gray-200 rounded-full h-6 mb-6 overflow-hidden">
           <div
-            className="absolute top-0 left-0 bg-teal-600 h-3 rounded-full transition-all duration-500"
+            className="absolute top-0 left-0 bg-teal-600 h-6 transition-all duration-500"
             style={{ width: `${progress}%` }}
-          />
+          >
+            <span className="absolute inset-0 flex items-center justify-center text-white font-medium">
+              {progress}%
+            </span>
+          </div>
         </div>
 
+        {/* Formulaire */}
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Étape 1 */}
           {step === 1 && (
@@ -76,9 +100,10 @@ const FournisseurSelect = () => {
                     setSelectFournisseur("Autre");
                     handleNextStep("Autre");
                   }}
-                  type="button"
+                  type="radio"
                   className="px-4 py-2 border rounded-lg hover:bg-gray-200"
                 >
+                  
                   Autre
                 </button>
                 <button
@@ -86,7 +111,7 @@ const FournisseurSelect = () => {
                     setSelectFournisseur("Aucun");
                     handleNextStep("Aucun");
                   }}
-                  type="button"
+                  type="radio"
                   className="px-4 py-2 border rounded-lg hover:bg-gray-200"
                 >
                   Aucun
